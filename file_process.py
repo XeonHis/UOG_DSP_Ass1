@@ -17,6 +17,7 @@ def show_time_domain(file_path):
     max_wave = wave_data.max()
 
     plt.plot(time, wave_data / max_wave)
+    plt.title('Time Domain')
     plt.xlabel('time')
     plt.ylabel('normalised amplitudes')
     plt.show()

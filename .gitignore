@@ -1,0 +1,5 @@
+# idea compile file
+.idea/
+
+# misc
+.DS_Store

@@ -17,7 +17,13 @@ def show_time_domain(file_path):
     max_wave = wave_data.max()
 
     plt.plot(time, wave_data / max_wave)
+    plt.xlabel('time')
+    plt.ylabel('normalised amplitudes')
     plt.show()
+
+
+def show_freq_domain(file_path):
+    pass
 
 
 if __name__ == '__main__':

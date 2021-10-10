@@ -40,6 +40,7 @@ def show_freq_domain(file_path):
     freqs = np.linspace(0, framerate / 2, nframes)
 
     plt.plot(np.log(freqs + epsilon), np.log(abs_fft + epsilon))
+    # plt.plot((freqs + epsilon), np.log(abs_fft + epsilon))
     plt.title('Frequency Domain')
     plt.xlabel('Frequency')
     plt.ylabel('')
@@ -47,5 +48,5 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    show_time_domain('asset/sound2.wav')
-    # show_freq_domain('asset/sound1.wav')
+    show_time_domain('asset/sound_pass.wav')
+    # show_freq_domain('asset/sound_pass.wav')

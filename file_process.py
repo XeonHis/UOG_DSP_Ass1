@@ -48,5 +48,5 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    show_time_domain('asset/sound_pass.wav')
+    show_time_domain('asset/sound_æ.wav')
     # show_freq_domain('asset/sound_pass.wav')

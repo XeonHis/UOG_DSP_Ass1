@@ -7,7 +7,7 @@ import struct
 import scipy.signal as signal
 
 
-def show_time_domain(file_path):
+def read_file(file_path):
     wave_file = wave.open(file_path, 'rb')
 
     nchannels = wave_file.getnchannels()
@@ -23,6 +23,11 @@ def show_time_domain(file_path):
         # right = val[2:4]
         v = struct.unpack('h', left)[0]
         wave_data[i] = v
+    return wave_data, nchannels, sample_width, framerate, numframes
+
+
+def show_time_domain(file_path):
+    wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
     time = np.linspace(0, numframes / framerate, numframes)
     max_wave = np.max(wave_data)
@@ -44,21 +49,7 @@ def show_time_domain(file_path):
 
 def show_freq_domain(file_path):
     epsilon = 1e-30
-    wave_file = wave.open(file_path, 'rb')
-
-    nchannels = wave_file.getnchannels()
-    sample_width = wave_file.getsampwidth()
-    framerate = wave_file.getframerate()
-    numframes = wave_file.getnframes()
-
-    wave_data = np.zeros(numframes)
-
-    for i in range(numframes):
-        val = wave_file.readframes(1)
-        left = val[0:2]
-        # right = val[2:4]
-        v = struct.unpack('h', left)[0]
-        wave_data[i] = v
+    wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
     # print(wave_data)
     fft = np.fft.fft(wave_data)
@@ -72,7 +63,8 @@ def show_freq_domain(file_path):
     # plt.plot(freqsbest[0], fftbest)
 
     plt.plot(np.log(freqs + epsilon), np.log(abs_fft + epsilon))
-    # plt.plot(np.log(freqs[int(0.6*freqs_length):int(0.61*freqs_length)]+epsilon), np.log(abs_fft[int(0.6*abs_fft_length):int(0.61*abs_fft_length)]+epsilon))
+    # plt.plot(np.log(freqs[int(0.6 * freqs_length):int(0.61 * freqs_length)] + epsilon),
+    #          np.log(abs_fft[int(0.6 * abs_fft_length):int(0.61 * abs_fft_length)] + epsilon))
     plt.title('Frequency Domain')
     plt.xlabel('Frequency')
     plt.ylabel('')

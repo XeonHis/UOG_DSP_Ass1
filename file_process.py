@@ -72,5 +72,6 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    # show_time_domain('asset/sound_æ.wav')
-    show_freq_domain('asset/vowel_A.wav')
+    # frequency of æ: 108Hz
+    show_time_domain('asset/sound_happy.wav')
+    # show_freq_domain('asset/sound_happy.wav')

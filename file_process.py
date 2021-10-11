@@ -52,19 +52,13 @@ def show_freq_domain(file_path):
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
     # print(wave_data)
-    fft = np.fft.fft(wave_data)
-    abs_fft = np.abs(fft)
+    abs_fft = np.abs(np.fft.fft(wave_data))
+    normalized_abs_fft = abs_fft / len(wave_data)
+    half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    freqs_length = len(freqs)
-    abs_fft_length = len(abs_fft)
 
-    # fftbest = abs_fft[signal.argrelextrema(abs_fft, np.greater)]
-    # freqsbest = signal.argrelextrema(abs_fft, np.greater)
-    # plt.plot(freqsbest[0], fftbest)
+    plt.plot(freqs[:int(len(freqs)/2)], half_fft)
 
-    plt.plot(np.log(freqs + epsilon), np.log(abs_fft + epsilon))
-    # plt.plot(np.log(freqs[int(0.6 * freqs_length):int(0.61 * freqs_length)] + epsilon),
-    #          np.log(abs_fft[int(0.6 * abs_fft_length):int(0.61 * abs_fft_length)] + epsilon))
     plt.title('Frequency Domain')
     plt.xlabel('Frequency')
     plt.ylabel('')
@@ -72,6 +66,9 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
+    # frequency of sine wave: 440Hz
     # frequency of æ: 108Hz
-    show_time_domain('asset/sound_happy.wav')
-    # show_freq_domain('asset/sound_happy.wav')
+    # frequency of eɪ: 613Hz
+    # frequency of ɜː: 118.9Hz
+    # show_time_domain('asset/sine.wav')
+    show_freq_domain('asset/sound_pass.wav')

@@ -4,6 +4,7 @@ import numpy as np
 from scipy.io import wavfile
 import wave
 import struct
+import scipy.signal as signal
 
 
 def show_time_domain(file_path):
@@ -62,10 +63,13 @@ def show_freq_domain(file_path):
     # print(wave_data)
     fft = np.fft.fft(wave_data)
     abs_fft = np.abs(fft)
-    print(np.argmax(abs_fft))
     freqs = np.linspace(0, framerate, numframes)
     freqs_length = len(freqs)
     abs_fft_length = len(abs_fft)
+
+    # fftbest = abs_fft[signal.argrelextrema(abs_fft, np.greater)]
+    # freqsbest = signal.argrelextrema(abs_fft, np.greater)
+    # plt.plot(freqsbest[0], fftbest)
 
     plt.plot(np.log(freqs + epsilon), np.log(abs_fft + epsilon))
     # plt.plot(np.log(freqs[int(0.6*freqs_length):int(0.61*freqs_length)]+epsilon), np.log(abs_fft[int(0.6*abs_fft_length):int(0.61*abs_fft_length)]+epsilon))
@@ -77,4 +81,4 @@ def show_freq_domain(file_path):
 
 if __name__ == '__main__':
     # show_time_domain('asset/sound_æ.wav')
-    show_freq_domain('asset/sound_æ.wav')
+    show_freq_domain('asset/vowel_A.wav')

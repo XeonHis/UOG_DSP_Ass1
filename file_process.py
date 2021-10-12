@@ -53,8 +53,9 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    x_time, y_time = show_time_domain('asset/sine.wav')
-    x_freq, y_freq = show_time_domain('asset/sine.wav')
+    x_time, y_time = show_time_domain('asset/vowel_A.wav')
+    x_freq, y_freq = show_freq_domain('asset/vowel_A.wav')
+    plt.figure(figsize=(40, 20))
     plt.subplot(2,1,1)
     plt.plot(x_time, y_time)
     # plt.plot(sliced_time, sliced_normalized_wave_data)

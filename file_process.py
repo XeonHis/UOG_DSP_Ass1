@@ -66,9 +66,5 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    # frequency of sine wave: 440Hz
-    # frequency of æ: 108Hz
-    # frequency of eɪ: 613Hz
-    # frequency of ɜː: 118.9Hz
     # show_time_domain('asset/sine.wav')
-    show_freq_domain('asset/sound_pass.wav')
+    show_freq_domain('asset/sound_æ.wav')

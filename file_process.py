@@ -51,6 +51,10 @@ def show_freq_domain(file_path):
     freqs = np.linspace(0, framerate, numframes)
     return freqs[:int(len(freqs)/2)], half_fft
 
+<<<<<<< Updated upstream
+=======
+    plt.plot(freqs[:int(len(freqs) / 2)], half_fft)
+>>>>>>> Stashed changes
 
 if __name__ == '__main__':
     x_time, y_time = show_time_domain('asset/vowel_A.wav')

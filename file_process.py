@@ -49,20 +49,20 @@ def show_freq_domain(file_path):
     normalized_abs_fft = abs_fft / len(wave_data)
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    return freqs[:int(len(freqs)/2)], half_fft
+    return freqs[:int(len(freqs) / 2)], half_fft
 
 
 if __name__ == '__main__':
     x_time, y_time = show_time_domain('asset/vowel_A.wav')
     x_freq, y_freq = show_freq_domain('asset/vowel_A.wav')
     plt.figure(figsize=(40, 20))
-    plt.subplot(2,1,1)
+    plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)
     # plt.plot(sliced_time, sliced_normalized_wave_data)
     plt.title('Time Domain')
     plt.xlabel('Time')
     plt.ylabel('Normalised amplitudes')
-    plt.subplot(2,1,2)
+    plt.subplot(2, 1, 2)
     plt.plot(x_freq, y_freq)
     plt.title('Frequency Domain')
     plt.xlabel('Frequency')

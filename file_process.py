@@ -36,17 +36,10 @@ def show_time_domain(file_path):
     time = np.linspace(0, numframes / framerate, numframes)
     max_wave = np.max(wave_data)
     normalized_wave_data = wave_data / max_wave
-    time_length = len(time)
-    normalized_wave_data_length = len(normalized_wave_data)
-    # sliced time & normalized wave data
-    sliced_time = time[int(0.5 * time_length):int(0.9 * time_length)]
-    sliced_normalized_wave_data = normalized_wave_data[
-                                  int(0.5 * normalized_wave_data_length):int(0.9 * normalized_wave_data_length)]
     return time, normalized_wave_data
 
 
 def show_freq_domain(file_path):
-    epsilon = 1e-30
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
     # print(wave_data)
     abs_fft = np.abs(np.fft.fft(wave_data))
@@ -66,7 +59,6 @@ if __name__ == '__main__':
     # plt.figure(figsize=(40, 20))
     plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)
-    # plt.plot(sliced_time, sliced_normalized_wave_data)
     plt.title('Time Domain')
     plt.xlabel('Time')
     plt.ylabel('Normalised amplitudes')

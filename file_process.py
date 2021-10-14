@@ -19,10 +19,14 @@ def read_file(file_path):
 
     for i in range(numframes):
         val = wave_file.readframes(1)
-        # left = val[0:2]
-        right = val[2:4]
-        v = struct.unpack('h', right)[0]
-        wave_data[i] = v
+        if len(val) >2:
+            # left = val[0:2]
+            right = val[2:4]
+            v = struct.unpack('h', right)[0]
+            wave_data[i] = v
+        else:
+            v = struct.unpack('h', val)[0]
+            wave_data[i] = v
     return wave_data, nchannels, sample_width, framerate, numframes
 
 

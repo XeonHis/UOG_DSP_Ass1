@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     # x_time, y_time = show_freq_domain('asset/vowel_A.wav')
     # x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
-    plt.figure(figsize=(20,60))
+    plt.figure(figsize= (50,30))
     x_time, y_time = show_time_domain('asset/new_record/newhappy.wav')
     x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
     x_org_freq, y_org_freq = show_org_freq_domain('asset/new_record/newhappy.wav')

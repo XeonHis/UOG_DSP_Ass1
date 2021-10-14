@@ -53,8 +53,8 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
-    x_time, y_time = show_time_domain('asset/vowel_A.wav')
-    x_freq, y_freq = show_freq_domain('asset/vowel_A.wav')
+    x_time, y_time = show_freq_domain('asset/vowel_A.wav')
+    x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
     plt.figure(figsize=(40, 20))
     plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)

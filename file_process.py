@@ -19,9 +19,9 @@ def read_file(file_path):
 
     for i in range(numframes):
         val = wave_file.readframes(1)
-        left = val[0:2]
-        # right = val[2:4]
-        v = struct.unpack('h', left)[0]
+        # left = val[0:2]
+        right = val[2:4]
+        v = struct.unpack('h', right)[0]
         wave_data[i] = v
     return wave_data, nchannels, sample_width, framerate, numframes
 
@@ -49,13 +49,13 @@ def show_freq_domain(file_path):
     normalized_abs_fft = abs_fft / len(wave_data)
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    return freqs[:int(len(freqs) / 2)], half_fft
+    return np.log10(freqs[:int(len(freqs) / 2)]), 20 * np.log10(half_fft / np.max(half_fft))
 
 
 if __name__ == '__main__':
-    x_time, y_time = show_freq_domain('asset/vowel_A.wav')
-    x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
-    plt.figure(figsize=(40, 20))
+    x_time, y_time = show_time_domain('asset/new_record/sentence.wav')
+    x_freq, y_freq = show_freq_domain('asset/new_record/sentence.wav')
+    # plt.figure(figsize=(40, 20))
     plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)
     # plt.plot(sliced_time, sliced_normalized_wave_data)

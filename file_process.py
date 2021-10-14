@@ -58,11 +58,11 @@ def show_freq_domain(file_path):
 
 if __name__ == '__main__':
 
-    x_time, y_time = show_freq_domain('asset/vowel_A.wav')
-    x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
+    x_time, y_time = show_freq_domain('asset/new_record/newhappy.wav')
+    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
     plt.figure(figsize=(40, 20))
-    x_time, y_time = show_time_domain('asset/new_record/e.wav')
-    x_freq, y_freq = show_freq_domain('asset/new_record/e.wav')
+    x_time, y_time = show_time_domain('asset/new_record/newhappy.wav')
+    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
     # plt.figure(figsize=(40, 20))
     plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)
@@ -75,4 +75,5 @@ if __name__ == '__main__':
     plt.title('Frequency Domain')
     plt.xlabel('Frequency')
     plt.ylabel('')
+    
     plt.show()

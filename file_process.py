@@ -53,9 +53,15 @@ def show_freq_domain(file_path):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
+    x_time, y_time = show_freq_domain('asset/vowel_A.wav')
+    x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
+    plt.figure(figsize=(40, 20))
+=======
     x_time, y_time = show_time_domain('asset/new_record/e.wav')
     x_freq, y_freq = show_freq_domain('asset/new_record/e.wav')
     # plt.figure(figsize=(40, 20))
+>>>>>>> 947bf12b39a6ed2deab1ab8cf81e5966baea1e9c
     plt.subplot(2, 1, 1)
     plt.plot(x_time, y_time)
     # plt.plot(sliced_time, sliced_normalized_wave_data)

@@ -7,12 +7,17 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import os
 
 from file_process import *
 
 
-# todo: 分段成小slot进行fft
+def divide_wav_file(file_path):
+    pass
+
+
 def detect_original_frequency(file_path):
+    # 74752, 1, 2, 44100, 74752
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
     abs_fft = np.abs(np.fft.fft(wave_data))
@@ -24,25 +29,85 @@ def detect_original_frequency(file_path):
 
 
 if __name__ == '__main__':
-    sen_time, sen_fft = detect_original_frequency('asset/new_record/pi.wav')
-    ai_time, ai_fft = detect_original_frequency('asset/sound_æ.wav')
-    i_time, i_fft = detect_original_frequency('asset/new_record/i.wav')
-    wu_time, wu_fft = detect_original_frequency('asset/new_record/wu.wav')
-    u_time, u_fft = detect_original_frequency('asset/new_record/u.wav')
+    divide_wav_file(None)
 
-    plt.subplot(3, 2, 1)
-    plt.plot(sen_time, sen_fft)
+    path = r"temp"
+    files = os.listdir(path)
+    files = [path + "/" + f for f in files if f.endswith('.wav')]
+    # print(len(files))
+    sen_freqs = list()
+    for i in range(len(files)):
+        time_i, slot_fft_i = detect_original_frequency(files[i])
+        # print(time_i[int(np.argmax(slot_fft_i))])
+        sen_freqs.append(time_i[int(np.argmax(slot_fft_i))])
+    sen_freqs.sort()
+    print(sen_freqs)
 
-    plt.subplot(3, 2, 2)
-    plt.plot(ai_time, ai_fft)
+    vowel_freqs = dict()
+    time_1, slot_fft_1 = detect_original_frequency('asset/new_record/e.wav')
+    time_2, slot_fft_2 = detect_original_frequency('asset/new_record/i.wav')
+    time_3, slot_fft_3 = detect_original_frequency('asset/new_record/er.wav')
+    time_4, slot_fft_4 = detect_original_frequency('asset/new_record/wu.wav')
+    time_5, slot_fft_5 = detect_original_frequency('asset/new_record/u.wav')
+    time_6, slot_fft_6 = detect_original_frequency('asset/new_record/o.wav')
 
-    plt.subplot(3, 2, 3)
-    plt.plot(i_time, i_fft)
+    vowel_freqs['e'] = (time_1[int(np.argmax(slot_fft_1))])
+    vowel_freqs['i'] = (time_2[int(np.argmax(slot_fft_2))])
+    vowel_freqs['er'] = (time_3[int(np.argmax(slot_fft_3))])
+    vowel_freqs['wu'] = (time_4[int(np.argmax(slot_fft_4))])
+    vowel_freqs['u'] = (time_5[int(np.argmax(slot_fft_5))])
+    vowel_freqs['o'] = (time_6[int(np.argmax(slot_fft_6))])
 
-    plt.subplot(3, 2, 4)
-    plt.plot(wu_time, wu_fft)
+    print(vowel_freqs)
 
-    plt.subplot(3, 2, 5)
-    plt.plot(u_time, u_fft)
+    scores = dict()
+
+    for k, v, in vowel_freqs.items():
+        temp_list = list()
+        for idx in range(len(sen_freqs)):
+            value = sen_freqs[idx] / v
+            if value > 1.3:
+                value = math.modf(value)[0]
+            temp_list.append(value)
+
+        for i in range(len(temp_list)):
+            if temp_list[i] < 1:
+                temp_list[i] = 1 - temp_list[i]
+            else:
+                temp_list[i] = temp_list[i] - 1
+        temp_list.sort(reverse=False)
+        scores[k] = temp_list[0]
+
+    print('score(distance to 100%): \n', scores)
+
+    plt.subplot(2, 3, 1)
+    plt.plot(time_1, slot_fft_1)
+    plt.title('e')
+    plt.xlim(0, 600)
+
+    plt.subplot(2, 3, 2)
+    plt.plot(time_2, slot_fft_2)
+    plt.title('i')
+    plt.xlim(0, 600)
+
+    plt.subplot(2, 3, 3)
+    plt.plot(time_3, slot_fft_3)
+    plt.title('er')
+    plt.xlim(0, 600)
+
+    plt.subplot(2, 3, 4)
+    plt.plot(time_4, slot_fft_4)
+    plt.title('wu')
+    plt.xlim(0, 600)
+
+    plt.subplot(2, 3, 5)
+    plt.plot(time_5, slot_fft_5)
+    plt.title('u')
+    plt.xlim(0, 600)
+
+    plt.subplot(2, 3, 6)
+    plt.plot(time_6, slot_fft_6)
+    plt.title('o')
+    plt.xlim(0, 600)
 
     plt.show()

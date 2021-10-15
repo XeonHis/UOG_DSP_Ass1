@@ -12,30 +12,34 @@ from file_process import *
 
 
 def divide_wav_file(file_path):
-    origAudio = wave.open(file_path, 'r')
-    frameRate = origAudio.getframerate()
-    nChannels = origAudio.getnchannels()
-    sampWidth = origAudio.getsampwidth()
-    nframes = origAudio.getnframes()
-    wave_data = origAudio.readframes(nframes)
+    wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
     time_slot = 1
-    slot_frames = int(time_slot * frameRate)
+    slot_frames = int(time_slot * framerate)
     start = 0
     # print(math.ceil(nframes / slot_frames))
+    if nchannels > 1:
+        wave_data.shape = -1, 2
+        wave_data = wave_data.T
+        # temp_data = wave_data.T
+    else:
+        wave_data = wave_data.T
+        # temp_data = wave_data.T
 
-    for i in range(math.ceil(nframes / slot_frames)+1):
+    for i in range(math.ceil(numframes / slot_frames)):
         num = start + slot_frames
         print(num)
-        if (num) < nframes:
+        if (num) < numframes:
+            print(wave_data[start], wave_data[start + slot_frames - 1])
             current_wave_data = wave_data[start:start + slot_frames]
         else:
-            current_wave_data = wave_data[start:nframes + 1]
+            print(wave_data[start], wave_data[numframes - 1])
+            current_wave_data = wave_data[start:numframes]
 
         chunkAudio = wave.open('temp/slot_' + str(i) + '.wav', 'w')
-        chunkAudio.setnchannels(nChannels)
-        chunkAudio.setsampwidth(sampWidth)
-        chunkAudio.setframerate(frameRate)
+        chunkAudio.setnchannels(nchannels)
+        chunkAudio.setsampwidth(sample_width)
+        chunkAudio.setframerate(framerate)
         chunkAudio.writeframes(current_wave_data)
         chunkAudio.close()
 

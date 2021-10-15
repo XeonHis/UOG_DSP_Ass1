@@ -8,4 +8,4 @@
 test/
 
 # pycache
-_pycache_/
+*/__pycache__

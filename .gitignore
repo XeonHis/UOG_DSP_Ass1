@@ -6,3 +6,6 @@
 
 # test & temp file
 test/
+
+# pycache
+_pycache_/

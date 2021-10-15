@@ -39,14 +39,18 @@ def show_time_domain(file_path):
     return time, normalized_wave_data
 
 
+
 def show_freq_domain(file_path):
+    
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
     # print(wave_data)
     abs_fft = np.abs(np.fft.fft(wave_data))
     normalized_abs_fft = abs_fft / len(wave_data)
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    return np.log10(freqs[:int(len(freqs) / 2)]), 20 * np.log10(half_fft / np.max(half_fft))
+    return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft))
+
+
 
 def show_org_freq_domain(file_path):
     epsilon = 1e-30

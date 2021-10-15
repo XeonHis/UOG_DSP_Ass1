@@ -8,4 +8,8 @@
 test/
 
 # pycache
+<<<<<<< HEAD
 */__pycache__
+=======
+__pycache__/
+>>>>>>> develop

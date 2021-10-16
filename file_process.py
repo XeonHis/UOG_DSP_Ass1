@@ -92,10 +92,10 @@ if __name__ == '__main__':
     plt.ylabel('')
     
     plt.xlabel('Logged Frequency')
-    plt.ylabel('Amplitudes')
+    plt.ylabel('Nmlz Amp')
     plt.subplot(3, 1, 3)
     plt.plot(x_org_freq, y_org_freq)
     plt.title('Frequency Domain')
     plt.xlabel('Origin Frequency')
-    plt.ylabel('Amplitudes')
+    plt.ylabel('Nmlz Amp')
     plt.show()

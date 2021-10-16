@@ -8,4 +8,7 @@
 test/
 
 # pycache
-_pycache_/
+__pycache__/
+
+# temp
+temp/

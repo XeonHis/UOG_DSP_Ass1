@@ -48,7 +48,7 @@ def divide_wav_file(file_path, time_slot):
         os.makedirs('temp/')
 
     for j in range(int(math.ceil(slot_num))):
-        current_file_name = "../temp/slot" + "-" + str(j) + ".wav"
+        current_file_name = "temp/slot" + "-" + str(j) + ".wav"
         current_slot_data = temp_data[int(frames_num_int * j):int(frames_num_int * j + frames_num)]
         current_slot_data.shape = 1, -1
         current_slot_data = current_slot_data.astype(np.short)

@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import os
+import shutil
 
 from file_process import *
 
@@ -63,8 +64,8 @@ def divide_wav_file(file_path, time_slot):
 def fft_operation(file_path):
     """
     FFT operation
-    :param file_path:
-    :return:
+    :param file_path: Original wav file path
+    :return: freqs, 20 * log10(fft/max_fft), name
     """
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
 
@@ -73,12 +74,15 @@ def fft_operation(file_path):
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
 
-    return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft))
+    return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft)), file_path[file_path.rfind(
+        '/') + 1:file_path.find('.')]
 
 
-if __name__ == '__main__':
-    divide_wav_file('asset/new_record/newhappy.wav', 0.2)
-
+def compare_freqs():
+    """
+    Compare frequency between sentences and vowels to generate the score
+    :return:
+    """
     # read files under the temp folder
     path = r"temp"
     files = os.listdir(path)
@@ -87,8 +91,8 @@ if __name__ == '__main__':
     # Store the highest frequency of current file
     sen_freqs = list()
     for i in range(len(files)):
-        time_i, slot_fft_i = fft_operation(files[i])
-        sen_freqs.append(time_i[int(np.argmax(slot_fft_i))])
+        freq_i, slot_fft_i, _ = fft_operation(files[i])
+        sen_freqs.append(freq_i[int(np.argmax(slot_fft_i))])
     sen_freqs.sort()
 
     print(sen_freqs)
@@ -97,19 +101,19 @@ if __name__ == '__main__':
     vowel_freqs = dict()
 
     # FFT operation of different vowel audio files
-    time_1, slot_fft_1 = fft_operation('asset/new_record/e.wav')
-    time_2, slot_fft_2 = fft_operation('asset/new_record/i.wav')
-    time_3, slot_fft_3 = fft_operation('asset/new_record/er.wav')
-    time_4, slot_fft_4 = fft_operation('asset/new_record/wu.wav')
-    time_5, slot_fft_5 = fft_operation('asset/new_record/u.wav')
-    time_6, slot_fft_6 = fft_operation('asset/new_record/o.wav')
+    freq_e, slot_fft_e, name_e = fft_operation('asset/new_record/e.wav')
+    freq_i, slot_fft_i, name_i = fft_operation('asset/new_record/i.wav')
+    freq_er, slot_fft_er, name_er = fft_operation('asset/new_record/er.wav')
+    freq_wu, slot_fft_wu, name_wu = fft_operation('asset/new_record/wu.wav')
+    freq_u, slot_fft_u, name_u = fft_operation('asset/new_record/u.wav')
+    freq_o, slot_fft_o, name_o = fft_operation('asset/new_record/o.wav')
 
-    vowel_freqs['e'] = (time_1[int(np.argmax(slot_fft_1))])
-    vowel_freqs['i'] = (time_2[int(np.argmax(slot_fft_2))])
-    vowel_freqs['er'] = (time_3[int(np.argmax(slot_fft_3))])
-    vowel_freqs['wu'] = (time_4[int(np.argmax(slot_fft_4))])
-    vowel_freqs['u'] = (time_5[int(np.argmax(slot_fft_5))])
-    vowel_freqs['o'] = (time_6[int(np.argmax(slot_fft_6))])
+    vowel_freqs['e'] = (freq_e[int(np.argmax(slot_fft_e))])
+    vowel_freqs['i'] = (freq_i[int(np.argmax(slot_fft_i))])
+    vowel_freqs['er'] = (freq_er[int(np.argmax(slot_fft_er))])
+    vowel_freqs['wu'] = (freq_wu[int(np.argmax(slot_fft_wu))])
+    vowel_freqs['u'] = (freq_u[int(np.argmax(slot_fft_u))])
+    vowel_freqs['o'] = (freq_o[int(np.argmax(slot_fft_o))])
 
     print(vowel_freqs)
 
@@ -142,37 +146,34 @@ if __name__ == '__main__':
         temp_list.sort(reverse=False)
         scores[k] = temp_list[0]
 
-    print('score(distance to 100%): \n', scores)
+    print('score(distance to 100%): \n', sorted(scores.items(), key=lambda x: x[1], reverse=False))
 
-    # Plot vowels' frequency
-    plt.subplot(2, 3, 1)
-    plt.plot(time_1, slot_fft_1)
-    plt.title('e')
-    plt.xlim(0, 600)
+    return [(freq_e, slot_fft_e, name_e), (freq_i, slot_fft_i, name_i), (freq_er, slot_fft_er, name_er),
+            (freq_wu, slot_fft_wu, name_wu), (freq_u, slot_fft_u, name_u), (freq_o, slot_fft_o, name_o)]
 
-    plt.subplot(2, 3, 2)
-    plt.plot(time_2, slot_fft_2)
-    plt.title('i')
-    plt.xlim(0, 600)
 
-    plt.subplot(2, 3, 3)
-    plt.plot(time_3, slot_fft_3)
-    plt.title('er')
-    plt.xlim(0, 600)
-
-    plt.subplot(2, 3, 4)
-    plt.plot(time_4, slot_fft_4)
-    plt.title('wu')
-    plt.xlim(0, 600)
-
-    plt.subplot(2, 3, 5)
-    plt.plot(time_5, slot_fft_5)
-    plt.title('u')
-    plt.xlim(0, 600)
-
-    plt.subplot(2, 3, 6)
-    plt.plot(time_6, slot_fft_6)
-    plt.title('o')
-    plt.xlim(0, 600)
+def show_figures(time_and_frequency):
+    """
+    Show figures of vowels' frequency
+    :param time_and_frequency: list, contains (frequency, fft_data, name)
+    :return: None
+    """
+    length = len(time_and_frequency)
+    row = math.floor(math.sqrt(length))
+    col = math.ceil(math.sqrt(length))
+    for i in range(length):
+        # Plot vowels' frequency
+        plt.subplot(row, col, i + 1)
+        plt.plot(time_and_frequency[i][0], time_and_frequency[i][1])
+        plt.title(time_and_frequency[i][-1])
+        plt.xlim(0, 600)
 
     plt.show()
+
+
+if __name__ == '__main__':
+    divide_wav_file('asset/new_record/sentence.wav', 0.1)
+    freq_list = compare_freqs()
+    # Remove temp file
+    shutil.rmtree('temp/')
+    show_figures(freq_list)

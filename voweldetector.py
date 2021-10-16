@@ -43,9 +43,9 @@ def divide_wav_file(file_path, time_slot):
     frames_num_int = int(frames_num)
 
     # Determine if 'temp' folder exists
-    if not os.path.exists('../temp/'):
+    if not os.path.exists('temp/'):
         # Create 'temp' folder if not exist
-        os.makedirs('../temp/')
+        os.makedirs('temp/')
 
     for j in range(int(math.ceil(slot_num))):
         current_file_name = "../temp/slot" + "-" + str(j) + ".wav"

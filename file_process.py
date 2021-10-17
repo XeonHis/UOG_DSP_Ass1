@@ -50,7 +50,14 @@ def show_freq_domain(file_path):
     freqs = np.linspace(0, framerate, numframes)
     return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft))
 
-
+def show_log_freq_domain(file_path):
+    wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
+    # print(wave_data)
+    abs_fft = np.abs(np.fft.fft(wave_data))
+    normalized_abs_fft = abs_fft / len(wave_data)
+    half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
+    freqs = np.linspace(0, framerate, numframes)
+    return np.log10(freqs[:int(len(freqs) / 2)]), 20 * np.log10(half_fft / np.max(half_fft))
 
 def show_org_freq_domain(file_path):
     epsilon = 1e-30
@@ -64,20 +71,22 @@ def show_org_freq_domain(file_path):
 
 if __name__ == '__main__':
 
-    #x_time, y_time = show_freq_domain('asset/seperate_hb/0.15.wav')
-    # x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
     ###########################################################################################
     #2.1
-    #plt.figure(figsize= (50,30))
+    #import splited wav files
+    #vowels
     x_a1, y_a1 = show_org_freq_domain('asset/seperate_hb/0.196.wav')
     x_a2, y_a2 = show_org_freq_domain('asset/seperate_hb/0.875.wav')
     x_o1, y_o1 = show_org_freq_domain('asset/seperate_hb/1.183.wav')
     x_o2, y_o2 = show_org_freq_domain('asset/seperate_hb/1.373.wav')
     x_i, y_i = show_org_freq_domain('asset/seperate_hb/0.593.wav')
     x_u, y_u = show_org_freq_domain('asset/seperate_hb/1.425.wav')
-    x_all_org, y_all_org = show_org_freq_domain('asset/sentences/sentence5.wav')
-    x_all, y_all = show_freq_domain('asset/sentences/sentence5.wav')
+    x_org, y_org = show_org_freq_domain('original.wav')
+    x_log, y_log = show_log_freq_domain('original.wav')
+
+    #plot Frequency domain
     plt.figure(figsize=(40, 20))
+
     plt.subplot(4, 2, 1)
     plt.title("a1")
     plt.plot(x_a1, y_a1)
@@ -127,7 +136,7 @@ if __name__ == '__main__':
     plt.ylabel('Nmlz Amp')
 
     plt.subplot(4, 2, 7)
-    plt.plot(x_all_org, y_all_org)
+    plt.plot(x_org, y_org)
     #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
     plt.plot([96.2, 86.2, 92.8, 173, 416.8, 338],[0,0,0,0,0,0], 'bo')
     #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
@@ -135,7 +144,7 @@ if __name__ == '__main__':
     plt.ylabel('Nmlz Amp')
 
     plt.subplot(4, 2, 8)
-    plt.plot(x_all, y_all)
+    plt.plot(x_log, y_log)
     #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
     #plt.plot([np.log10(96.2), np.log10(86.2), np.log10(92.8), np.log10(173), np.log10(416.8), np.log10(338)],[0,0,0,0,0,0], 'bo')
     #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
@@ -145,6 +154,8 @@ if __name__ == '__main__':
 
     ###################################################################################################
     #2.2
+    #import split wav file
+    #consonant
     x_h, y_h = show_org_freq_domain('asset/seperate_hb/0.15.wav')
     x_pp, y_pp = show_org_freq_domain('asset/seperate_hb/0.30.wav')
     x_y1, y_y1 = show_org_freq_domain('asset/seperate_hb/0.41.wav')
@@ -157,7 +168,7 @@ if __name__ == '__main__':
     x_y3, y_y3 = show_org_freq_domain('asset/seperate_hb/1.28.wav')
 
     plt.figure(figsize=(15, 15))
-    # plt.subplot(5, 2, 1)
+    plt.subplot(5, 2, 1)
     plt.title("h")
     plt.plot(x_h, y_h)
     # plt.plot(96.2, 1, 'bo')
@@ -229,7 +240,7 @@ if __name__ == '__main__':
     plt.ylabel('Nmlz Amp')
     plt.show()
 
-    plt.plot(x_all[:1500], y_all[:1500])
+    plt.plot(x_log[:1500], y_log[:1500])
     #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
     #plt.plot([np.log10(44), np.log10(86.2), np.log10(92.8), np.log10(173), np.log10(416.8), np.log10(338)],[0,0,0,0,0,0], 'bo')
     #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')

@@ -4,7 +4,7 @@ import scipy.io.wavfile as wavfile
 from file_process import *
 
 def y_freq_max():
-    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
+    x_freq, y_freq = show_freq_domain('asset/sentences/newhappy.wav')
     maxAmp = np.argmax(y_freq)
     return maxAmp
 
@@ -32,7 +32,7 @@ def enhance(x_freq, start_freq, end_freq):
             bounds.append(i)
             break 
 
-    wave_data, nchannels, sample_width, framerate, numframes = read_file('asset/new_record/newhappy.wav')
+    wave_data, nchannels, sample_width, framerate, numframes = read_file('asset/sentences/newhappy.wav')
     wave_data_fre = np.fft.fft(wave_data)
 
     start = bounds[0]

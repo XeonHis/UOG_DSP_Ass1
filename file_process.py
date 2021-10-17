@@ -73,7 +73,7 @@ if __name__ == '__main__':
     x_o2, y_o2 = show_org_freq_domain('asset/seperate_hb/1.373.wav')
     x_i, y_i = show_org_freq_domain('asset/seperate_hb/0.593.wav')
     x_u, y_u = show_org_freq_domain('asset/seperate_hb/1.425.wav')
-    x_all, y_all = show_org_freq_domain('asset/new_record/newhappy.wav')
+    x_all, y_all = show_org_freq_domain('asset/sentences/newhappy.wav')
     plt.figure(figsize=(40, 20))
     plt.subplot(3, 2, 1)
     plt.title("a1")

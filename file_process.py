@@ -1,10 +1,7 @@
-import scipy.fftpack
 from matplotlib import pyplot as plt
 import numpy as np
-from scipy.io import wavfile
 import wave
 import struct
-import scipy.signal as signal
 
 
 def read_file(file_path):

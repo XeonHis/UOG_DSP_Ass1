@@ -1,11 +1,3 @@
-# frequency of sine wave: 440Hz
-# frequency of æ: 107Hz
-# frequency of eɪ: 613Hz
-# frequency of ɜː: 118.9Hz
-# frequency of happy: peak_1 = 131Hz, peak_2 = 667Hz
-# frequency of E: 126Hz
-import matplotlib.pyplot as plt
-import numpy as np
 import math
 import os
 import shutil

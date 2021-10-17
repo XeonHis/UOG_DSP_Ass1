@@ -1,6 +1,3 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy.io.wavfile as wavfile 
 from file_process import *
 
 def find_highst_freq():

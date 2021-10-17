@@ -18,7 +18,7 @@ def divide_wav_file(file_path, time_slot):
     Splitting audio files into time_slot spaced files and write into 'temp' folder to further FFT operation
     :param file_path: Original wav file path
     :param time_slot: Time period to be intercepted, second as unit
-    :return: None
+    :return: the relative path of the audio file
     """
     # open original wav file
     f = wave.open(file_path, 'rb')
@@ -59,6 +59,7 @@ def divide_wav_file(file_path, time_slot):
         f.setframerate(framerate)
         f.writeframes(current_slot_data.tostring())
         f.close()
+    return file_path
 
 
 def fft_operation(file_path):
@@ -78,7 +79,7 @@ def fft_operation(file_path):
         '/') + 1:file_path.find('.')]
 
 
-def compare_freqs():
+def compare_freqs(file_path):
     """
     Compare frequency between sentences and vowels to generate the score
     :return:
@@ -175,7 +176,7 @@ def compare_freqs():
     vowel_tostring['uh'] = '/ʌ/'
     vowel_tostring['e'] = '/iː/'
     # print(list(output_vowels.keys()))
-    print('\nThese vowels are in sentences: ', end='')
+    print('\nThese vowels are in sentences (' + file_path + '): ', end='')
     for i in range(len(output_vowels_list)):
         print(vowel_tostring[output_vowels_list[i]], end=' ')
 
@@ -204,8 +205,8 @@ def show_figures(time_and_frequency):
 
 
 if __name__ == '__main__':
-    divide_wav_file('asset/new_record/sentence3.wav', 0.1)
-    freq_list = compare_freqs()
+    # 2 arguments: audio file path, time interval
+    freq_list = compare_freqs(divide_wav_file('asset/new_record/sentence3.wav', 0.1))
     # Remove temp file
     shutil.rmtree('temp/')
     show_figures(freq_list)

@@ -48,7 +48,7 @@ def show_freq_domain(file_path):
     normalized_abs_fft = abs_fft / len(wave_data)
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    return np.log10(freqs[:int(len(freqs) / 2)]), 20 * np.log10(half_fft / np.max(half_fft))
+    return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft))
 
 
 

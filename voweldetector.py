@@ -172,7 +172,7 @@ def show_figures(time_and_frequency):
 
 
 if __name__ == '__main__':
-    divide_wav_file('asset/new_record/sentence.wav', 0.1)
+    divide_wav_file('asset/new_record/newhappy.wav', 0.1)
     freq_list = compare_freqs()
     # Remove temp file
     shutil.rmtree('temp/')

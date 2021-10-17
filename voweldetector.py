@@ -95,34 +95,40 @@ def compare_freqs():
         sen_freqs.append(freq_i[int(np.argmax(slot_fft_i))])
     sen_freqs.sort()
 
-    print(sen_freqs)
+    # print(sen_freqs)
 
     # Store frequency of different vowels
     vowel_freqs = dict()
 
     # FFT operation of different vowel audio files
-    freq_e, slot_fft_e, name_e = fft_operation('asset/new_record/e.wav')
+    freq_ei, slot_fft_ei, name_ei = fft_operation('asset/new_record/ei.wav')
     freq_i, slot_fft_i, name_i = fft_operation('asset/new_record/i.wav')
     freq_er, slot_fft_er, name_er = fft_operation('asset/new_record/er.wav')
     freq_wu, slot_fft_wu, name_wu = fft_operation('asset/new_record/wu.wav')
     freq_u, slot_fft_u, name_u = fft_operation('asset/new_record/u.wav')
     freq_o, slot_fft_o, name_o = fft_operation('asset/new_record/o.wav')
+    freq_ai, slot_fft_ai, name_ai = fft_operation('asset/new_record/ai.wav')
+    freq_uh, slot_fft_uh, name_uh = fft_operation('asset/new_record/uh.wav')
+    freq_e, slot_fft_e, name_e = fft_operation('asset/new_record/e.wav')
 
-    vowel_freqs['e'] = (freq_e[int(np.argmax(slot_fft_e))])
+    vowel_freqs['ei'] = (freq_ei[int(np.argmax(slot_fft_ei))])
     vowel_freqs['i'] = (freq_i[int(np.argmax(slot_fft_i))])
     vowel_freqs['er'] = (freq_er[int(np.argmax(slot_fft_er))])
     vowel_freqs['wu'] = (freq_wu[int(np.argmax(slot_fft_wu))])
     vowel_freqs['u'] = (freq_u[int(np.argmax(slot_fft_u))])
     vowel_freqs['o'] = (freq_o[int(np.argmax(slot_fft_o))])
+    vowel_freqs['ai'] = (freq_ai[int(np.argmax(slot_fft_ai))])
+    vowel_freqs['uh'] = (freq_uh[int(np.argmax(slot_fft_uh))])
+    vowel_freqs['e'] = (freq_e[int(np.argmax(slot_fft_e))])
 
-    print(vowel_freqs)
+    # print(vowel_freqs)
 
     '''
     Store the score which defines as 1 - distance between different sentences' highest frequency and vowels' frequency
     e.g.
         A: sentence_1's highest frequency
         B: vowel /æ/'s frequency
-        score = 1 - abs( A - B )
+        score = 1 - A / B
     '''
     scores = dict()
     for k, v, in vowel_freqs.items():
@@ -146,10 +152,20 @@ def compare_freqs():
         temp_list.sort(reverse=False)
         scores[k] = temp_list[0]
 
-    print('score(distance to 100%): \n', sorted(scores.items(), key=lambda x: x[1], reverse=False))
+    print('score(distance to 100%): ', sorted(scores.items(), key=lambda x: x[1], reverse=False))
 
-    return [(freq_e, slot_fft_e, name_e), (freq_i, slot_fft_i, name_i), (freq_er, slot_fft_er, name_er),
-            (freq_wu, slot_fft_wu, name_wu), (freq_u, slot_fft_u, name_u), (freq_o, slot_fft_o, name_o)]
+    # We set threshold as 4%, if distance to 100% is lower than threshold, it means the vowel is in the sentence
+    threshold = 0.04
+    output_vowels = dict()
+    score_list = sorted(scores.items(), key=lambda x: x[1], reverse=False)
+    for i in range(len(score_list)):
+        if float(score_list[i][1]) < threshold:
+            output_vowels[score_list[i][0]] = score_list[i][1]
+    print(list(output_vowels.keys()))
+
+    return [(freq_ei, slot_fft_ei, name_ei), (freq_i, slot_fft_i, name_i), (freq_er, slot_fft_er, name_er),
+            (freq_wu, slot_fft_wu, name_wu), (freq_u, slot_fft_u, name_u), (freq_o, slot_fft_o, name_o),
+            (freq_ai, slot_fft_ai, name_ai), (freq_uh, slot_fft_uh, name_uh), (freq_e, slot_fft_e, name_e)]
 
 
 def show_figures(time_and_frequency):
@@ -172,7 +188,7 @@ def show_figures(time_and_frequency):
 
 
 if __name__ == '__main__':
-    divide_wav_file('asset/new_record/newhappy.wav', 0.1)
+    divide_wav_file('asset/new_record/sentence4.wav', 0.1)
     freq_list = compare_freqs()
     # Remove temp file
     shutil.rmtree('temp/')

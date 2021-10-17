@@ -41,7 +41,7 @@ def show_time_domain(file_path):
 
 
 def show_freq_domain(file_path):
-    
+
     wave_data, nchannels, sample_width, framerate, numframes = read_file(file_path)
     # print(wave_data)
     abs_fft = np.abs(np.fft.fft(wave_data))
@@ -64,38 +64,56 @@ def show_org_freq_domain(file_path):
 
 if __name__ == '__main__':
 
-
-    x_time, y_time = show_freq_domain('asset/new_record/newhappy.wav')
-    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
-    plt.figure(figsize=(40, 20))
-    x_time, y_time = show_time_domain('asset/new_record/newhappy.wav')
-    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
-
-    # x_time, y_time = show_freq_domain('asset/vowel_A.wav')
+    #x_time, y_time = show_freq_domain('asset/seperate_hb/0.15.wav')
     # x_freq, y_freq = show_freq_domain('asset/vowel_E.wav')
-    plt.figure(figsize= (50,30))
-    x_time, y_time = show_time_domain('asset/new_record/newhappy.wav')
-    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
-    x_org_freq, y_org_freq = show_org_freq_domain('asset/new_record/newhappy.wav')
-
-    # plt.figure(figsize=(40, 20))
-    plt.subplot(3, 1, 1)
-    plt.plot(x_time, y_time)
-    plt.title('Time Domain')
-    plt.xlabel('Time')
+    #plt.figure(figsize= (50,30))
+    x_a1, y_a1 = show_org_freq_domain('asset/seperate_hb/0.196.wav')
+    x_a2, y_a2 = show_org_freq_domain('asset/seperate_hb/0.593.wav')
+    x_o1, y_o1 = show_org_freq_domain('asset/seperate_hb/1.183.wav')
+    x_o2, y_o2 = show_org_freq_domain('asset/seperate_hb/1.373.wav')
+    x_i, y_i = show_org_freq_domain('asset/seperate_hb/0.593.wav')
+    x_u, y_u = show_org_freq_domain('asset/seperate_hb/1.425.wav')
+    x_all, y_all = show_org_freq_domain('asset/new_record/newhappy.wav')
+    plt.figure(figsize=(40, 20))
+    plt.subplot(3, 2, 1)
+    plt.title("a1")
+    plt.plot(x_a1, y_a1)
+    # plt.xlabel('A1-Frequency')
     plt.ylabel('Normalised amplitudes')
-    plt.subplot(3, 1, 2)
-    plt.plot(x_freq, y_freq)
-    plt.title('Frequency Domain')
 
-    plt.xlabel('Frequency')
-    plt.ylabel('')
-    
-    plt.xlabel('Logged Frequency')
-    plt.ylabel('Amplitudes')
-    plt.subplot(3, 1, 3)
-    plt.plot(x_org_freq, y_org_freq)
-    plt.title('Frequency Domain')
-    plt.xlabel('Origin Frequency')
-    plt.ylabel('Amplitudes')
+    plt.subplot(3, 2, 2)
+    plt.title("a2")
+    plt.plot(x_a2 , y_a2 )
+    # plt.xlabel('A2-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(3, 2, 3)
+    plt.title("o1")
+    plt.plot(x_o1 , y_o1 )
+    # plt.xlabel('O1-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(3, 2, 4)
+    plt.title("o2")
+    plt.plot(x_o2 , y_o2 )
+    # plt.xlabel('O2-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(3, 2, 5)
+    plt.title("i")
+    plt.plot(x_i , y_i )
+    # plt.xlabel('I-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(3, 2, 6)
+    plt.title("u")
+    plt.plot(x_u , y_u )
+    # plt.xlabel('U-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    # plt.subplot(7, 3, 7)
+    # plt.plot(x_all[:1500], y_all[:1500])
+    # plt.xlabel('Origin Frequency')
+    # plt.ylabel('Nmlz Amp')
+
     plt.show()

@@ -153,7 +153,7 @@ def compare_freqs(file_path):
         temp_list.sort(reverse=False)
         scores[k] = temp_list[0]
 
-    print('score(distance to 100%): ', sorted(scores.items(), key=lambda x: x[1], reverse=False))
+    # print('score(distance to 100%): ', sorted(scores.items(), key=lambda x: x[1], reverse=False))
 
     # We set threshold as 4%, if distance to 100% is lower than threshold, it means the vowel is in the sentence
     threshold = 0.04
@@ -166,7 +166,7 @@ def compare_freqs(file_path):
 
     # Phonetic transcription of vowels
     vowel_tostring = dict()
-    vowel_tostring['ei'] = '/ei/'
+    vowel_tostring['ei'] = '/e/'
     vowel_tostring['i'] = '/ɪ/'
     vowel_tostring['er'] = '/ɜː/'
     vowel_tostring['wu'] = '/u:/'
@@ -206,7 +206,13 @@ def show_figures(time_and_frequency):
 
 if __name__ == '__main__':
     # 2 arguments: audio file path, time interval
-    freq_list = compare_freqs(divide_wav_file('asset/sentences/sentence3.wav', 0.1))
+    # Sentence 1 detection
+    freq_list_1 = compare_freqs(divide_wav_file('vowel1.wav', 0.1))
     # Remove temp file
     shutil.rmtree('temp/')
-    show_figures(freq_list)
+
+    # Sentence 2 detection
+    freq_list_2 = compare_freqs(divide_wav_file('vowel2.wav', 0.1))
+    # Remove temp file
+    shutil.rmtree('temp/')
+

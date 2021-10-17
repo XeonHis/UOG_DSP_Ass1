@@ -8,7 +8,7 @@ def find_highst_freq():
     Find the highest harmonic voice frequencies
     :return: The value of Hertz corresponding to the highest frequency in freq_domain
      """
-    x_freq, y_freq = show_freq_domain('asset/sentences/sentence5.wav')
+    x_freq, y_freq = show_freq_domain('original.wav')
     maxAmp = np.argmax(y_freq)
     return maxAmp
 
@@ -46,7 +46,7 @@ def enhance(x_freq, start_freq, end_freq):
             break 
 
     # Read wavfile and fft opration
-    wave_data, nchannels, sample_width, framerate, numframes = read_file('asset/sentences/sentence5.wav')
+    wave_data, nchannels, sample_width, framerate, numframes = read_file('original.wav')
     wave_data_fre = np.fft.fft(wave_data)
 
     start = bounds[0]
@@ -69,11 +69,11 @@ def enhance(x_freq, start_freq, end_freq):
     after_enhance = np.fft.ifft(wave_data_fre)
     clr = np.real(after_enhance)
     enhanced_audio = clr.astype(np.int16)
-    wavfile.write('enhance.wav', framerate, enhanced_audio)
+    wavfile.write('improved.wav', framerate, enhanced_audio)
     
 if __name__ == '__main__':
 
-    x_freq, y_freq = show_freq_domain('asset/sentences/sentence5.wav')
+    x_freq, y_freq = show_freq_domain('original.wav')
     enhance(x_freq, 85, find_highst_freq())
     
     

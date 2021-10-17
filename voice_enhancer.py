@@ -55,7 +55,8 @@ def enhance(x_freq, start_freq, end_freq):
     wavfile.write('enhance.wav', framerate, enhanced_audio)
     
 if __name__ == '__main__':
-    
+
+    # x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
     enhance(x_freq,85,y_freq_max())
     
     

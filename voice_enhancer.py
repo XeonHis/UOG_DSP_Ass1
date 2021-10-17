@@ -1,4 +1,5 @@
 from file_process import *
+import scipy.io.wavfile as wavfile
 
 def find_highst_freq():
     """

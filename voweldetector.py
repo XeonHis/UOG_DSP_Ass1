@@ -49,7 +49,7 @@ def divide_wav_file(file_path, time_slot):
         f.setnchannels(nchannels)
         f.setsampwidth(sampwidth)
         f.setframerate(framerate)
-        f.writeframes(current_slot_data.tostring())
+        f.writeframes(current_slot_data.tobytes())
         f.close()
     return file_path
 

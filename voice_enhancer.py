@@ -8,7 +8,7 @@ def find_highst_freq():
     Find the highest harmonic voice frequencies
     :return: The value of Hertz corresponding to the highest frequency in freq_domain
      """
-    x_freq, y_freq = show_freq_domain('asset/new_record/newhappy.wav')
+    x_freq, y_freq = show_freq_domain('asset/sentences/sentence5.wav')
     maxAmp = np.argmax(y_freq)
     return maxAmp
 
@@ -25,7 +25,7 @@ def enhance(x_freq, start_freq, end_freq):
 
     for i in range(len(x_freq)):
         # 85 is the lowest Hertz value of human sound
-        if x_freq[i] < 85:
+        if x_freq[i] > 20:
             bounds.append(i)
             break 
 
@@ -46,7 +46,7 @@ def enhance(x_freq, start_freq, end_freq):
             break 
 
     # Read wavfile and fft opration
-    wave_data, nchannels, sample_width, framerate, numframes = read_file('asset/new_record/newhappy.wav')
+    wave_data, nchannels, sample_width, framerate, numframes = read_file('asset/sentences/sentence5.wav')
     wave_data_fre = np.fft.fft(wave_data)
 
     start = bounds[0]

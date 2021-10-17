@@ -48,7 +48,7 @@ def show_freq_domain(file_path):
     normalized_abs_fft = abs_fft / len(wave_data)
     half_fft = 2 * normalized_abs_fft[range(int(len(wave_data) / 2))]
     freqs = np.linspace(0, framerate, numframes)
-    return np.log10(freqs[:int(len(freqs) / 2)]), 20 * np.log10(half_fft / np.max(half_fft))
+    return freqs[:int(len(freqs) / 2)], 20 * np.log10(half_fft / np.max(half_fft))
 
 
 
@@ -75,7 +75,6 @@ if __name__ == '__main__':
     x_o2, y_o2 = show_org_freq_domain('asset/seperate_hb/1.373.wav')
     x_i, y_i = show_org_freq_domain('asset/seperate_hb/0.593.wav')
     x_u, y_u = show_org_freq_domain('asset/seperate_hb/1.425.wav')
-<<<<<<< HEAD
     x_all_org, y_all_org = show_org_freq_domain('asset/new_record/newhappy.wav')
     x_all, y_all = show_freq_domain('asset/new_record/newhappy.wav')
     # plt.figure(figsize=(40, 20))
@@ -126,45 +125,6 @@ if __name__ == '__main__':
     # #u 338
     # # plt.xlabel('U-Frequency')
     # plt.ylabel('Nmlz Amp')
-=======
-    x_all, y_all = show_org_freq_domain('asset/sentences/newhappy.wav')
-    plt.figure(figsize=(40, 20))
-    plt.subplot(3, 2, 1)
-    plt.title("a1")
-    plt.plot(x_a1, y_a1)
-    # plt.xlabel('A1-Frequency')
-    plt.ylabel('Normalised amplitudes')
-
-    plt.subplot(3, 2, 2)
-    plt.title("a2")
-    plt.plot(x_a2 , y_a2 )
-    # plt.xlabel('A2-Frequency')
-    plt.ylabel('Nmlz Amp')
-
-    plt.subplot(3, 2, 3)
-    plt.title("o1")
-    plt.plot(x_o1 , y_o1 )
-    # plt.xlabel('O1-Frequency')
-    plt.ylabel('Nmlz Amp')
-
-    plt.subplot(3, 2, 4)
-    plt.title("o2")
-    plt.plot(x_o2 , y_o2 )
-    # plt.xlabel('O2-Frequency')
-    plt.ylabel('Nmlz Amp')
-
-    plt.subplot(3, 2, 5)
-    plt.title("i")
-    plt.plot(x_i , y_i )
-    # plt.xlabel('I-Frequency')
-    plt.ylabel('Nmlz Amp')
-
-    plt.subplot(3, 2, 6)
-    plt.title("u")
-    plt.plot(x_u , y_u )
-    # plt.xlabel('U-Frequency')
-    plt.ylabel('Nmlz Amp')
->>>>>>> 6bc1f2a61087d6786466d48f064b729b0b7b0af4
 
     # plt.subplot(4, 2, 7)
     # plt.plot(x_all_org[:1500], y_all_org[:1500])

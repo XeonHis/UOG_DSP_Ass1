@@ -75,73 +75,73 @@ if __name__ == '__main__':
     x_o2, y_o2 = show_org_freq_domain('asset/seperate_hb/1.373.wav')
     x_i, y_i = show_org_freq_domain('asset/seperate_hb/0.593.wav')
     x_u, y_u = show_org_freq_domain('asset/seperate_hb/1.425.wav')
-    x_all_org, y_all_org = show_org_freq_domain('asset/new_record/newhappy.wav')
-    x_all, y_all = show_freq_domain('asset/new_record/newhappy.wav')
-    # plt.figure(figsize=(40, 20))
-    # plt.subplot(4, 2, 1)
-    # plt.title("a1")
-    # plt.plot(x_a1, y_a1)
-    # plt.plot(96.2, 1, 'bo')
-    # #a1 96.2
-    # # plt.xlabel('A1-Frequency')
-    # plt.ylabel('Normalised amplitudes')
-    #
-    # plt.subplot(4, 2, 2)
-    # plt.title("a2")
-    # plt.plot(x_a2 , y_a2 )
-    # plt.plot(86.2, 1, 'bo')
-    # #a2 86.2
-    # # plt.xlabel('A2-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(4, 2, 3)
-    # plt.title("o1")
-    # plt.plot(x_o1 , y_o1 )
-    # plt.plot(92.8, 1, 'bo')
-    # #o1 92.8
-    # # plt.xlabel('O1-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(4, 2, 4)
-    # plt.title("o2")
-    # plt.plot(x_o2 , y_o2 )
-    # plt.plot(173, 1, 'bo')
-    # #o2 173
-    # # plt.xlabel('O2-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(4, 2, 5)
-    # plt.title("i")
-    # plt.plot(x_i , y_i )
-    # plt.plot(416.8, 1, 'bo')
-    # #i 416.8
-    # # plt.xlabel('I-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(4, 2, 6)
-    # plt.title("u")
-    # plt.plot(x_u , y_u )
-    # plt.plot(338, 1, 'bo')
-    # #u 338
-    # # plt.xlabel('U-Frequency')
-    # plt.ylabel('Nmlz Amp')
+    x_all_org, y_all_org = show_org_freq_domain('asset/sentences/sentence5.wav')
+    x_all, y_all = show_freq_domain('asset/sentences/sentence5.wav')
+    plt.figure(figsize=(40, 20))
+    plt.subplot(4, 2, 1)
+    plt.title("a1")
+    plt.plot(x_a1, y_a1)
+    plt.plot(96.2, 1, 'bo')
+    #a1 96.2
+    # plt.xlabel('A1-Frequency')
+    plt.ylabel('Normalised amplitudes')
 
-    # plt.subplot(4, 2, 7)
-    # plt.plot(x_all_org[:1500], y_all_org[:1500])
-    # #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
-    # plt.plot([96.2, 86.2, 92.8, 173, 416.8, 338],[0,0,0,0,0,0], 'bo')
-    # #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
-    # plt.xlabel('Unlogged Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # #plt.subplot(4, 2, 8)
-    # plt.plot(x_all[:1500], y_all[:1500])
-    # #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
-    # plt.plot([np.log10(96.2), np.log10(86.2), np.log10(92.8), np.log10(173), np.log10(416.8), np.log10(338)],[0,0,0,0,0,0], 'bo')
-    # #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
-    # plt.xlabel('Frequency Doman')
-    # plt.ylabel('Nmlz Amp')
-    # plt.show()
+    plt.subplot(4, 2, 2)
+    plt.title("a2")
+    plt.plot(x_a2 , y_a2 )
+    plt.plot(86.2, 1, 'bo')
+    #a2 86.2
+    # plt.xlabel('A2-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 3)
+    plt.title("o1")
+    plt.plot(x_o1 , y_o1 )
+    plt.plot(92.8, 1, 'bo')
+    #o1 92.8
+    # plt.xlabel('O1-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 4)
+    plt.title("o2")
+    plt.plot(x_o2 , y_o2 )
+    plt.plot(173, 1, 'bo')
+    #o2 173
+    # plt.xlabel('O2-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 5)
+    plt.title("i")
+    plt.plot(x_i , y_i )
+    plt.plot(416.8, 1, 'bo')
+    #i 416.8
+    # plt.xlabel('I-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 6)
+    plt.title("u")
+    plt.plot(x_u , y_u )
+    plt.plot(338, 1, 'bo')
+    #u 338
+    # plt.xlabel('U-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 7)
+    plt.plot(x_all_org, y_all_org)
+    #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
+    plt.plot([96.2, 86.2, 92.8, 173, 416.8, 338],[0,0,0,0,0,0], 'bo')
+    #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
+    plt.xlabel('Unlogged Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(4, 2, 8)
+    plt.plot(x_all, y_all)
+    #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
+    #plt.plot([np.log10(96.2), np.log10(86.2), np.log10(92.8), np.log10(173), np.log10(416.8), np.log10(338)],[0,0,0,0,0,0], 'bo')
+    #plt.plot([np.log10(96.2)],[20*np.log10(0.243)], 'bo')
+    plt.xlabel('Frequency Doman')
+    plt.ylabel('Nmlz Amp')
+    plt.show()
 
     ###################################################################################################
     #2.2
@@ -157,77 +157,77 @@ if __name__ == '__main__':
     x_y3, y_y3 = show_org_freq_domain('asset/seperate_hb/1.28.wav')
 
     plt.figure(figsize=(15, 15))
-    # # plt.subplot(5, 2, 1)
-    # plt.title("h")
-    # plt.plot(x_h, y_h)
-    # # plt.plot(96.2, 1, 'bo')
-    # #h
-    # # plt.xlabel('H-Frequency')
-    # plt.ylabel('Normalised amplitudes')
-    #
-    # plt.subplot(5, 2, 2)
-    # plt.title("pp")
-    # plt.plot(x_pp , y_pp)
-    # # plt.plot(92.8, 1, 'bo')
-    # # plt.xlabel('PP-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 3)
-    # plt.title("y1")
-    # plt.plot(x_y1 , y_y1 )
-    # # plt.plot(92.8, 1, 'bo')
-    # # plt.xlabel('Y1-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 4)
-    # plt.title("b")
-    # plt.plot(x_b, y_b )
-    # # plt.plot(173, 1, 'bo')
-    # # plt.xlabel('B-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 5)
-    # plt.title("r")
-    # plt.plot(x_r, y_r)
-    # # plt.plot(416.8, 1, 'bo')
-    # # plt.xlabel('R-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 6)
-    # plt.title("th")
-    # plt.plot(x_th , y_th )
-    # # plt.plot(338, 1, 'bo')
-    # # plt.xlabel('TH-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 7)
-    # plt.title("d")
-    # plt.plot(x_d, y_d)
-    # # plt.plot(416.8, 1, 'bo')
-    # # plt.xlabel('D-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 8)
-    # plt.title("y2")
-    # plt.plot(x_y2 , y_y2 )
-    # # plt.plot(338, 1, 'bo')
-    # # plt.xlabel('Y2-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 9)
-    # plt.title("t")
-    # plt.plot(x_t, y_t)
-    # # plt.plot(416.8, 1, 'bo')
-    # # plt.xlabel('T-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    #
-    # plt.subplot(5, 2, 10)
-    # plt.title("y3")
-    # plt.plot(x_y3 , y_y3 )
-    # # plt.plot(338, 1, 'bo')
-    # # plt.xlabel('R-Frequency')
-    # plt.ylabel('Nmlz Amp')
-    # plt.show()
+    # plt.subplot(5, 2, 1)
+    plt.title("h")
+    plt.plot(x_h, y_h)
+    # plt.plot(96.2, 1, 'bo')
+    #h
+    # plt.xlabel('H-Frequency')
+    plt.ylabel('Normalised amplitudes')
+
+    plt.subplot(5, 2, 2)
+    plt.title("pp")
+    plt.plot(x_pp , y_pp)
+    # plt.plot(92.8, 1, 'bo')
+    # plt.xlabel('PP-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 3)
+    plt.title("y1")
+    plt.plot(x_y1 , y_y1 )
+    # plt.plot(92.8, 1, 'bo')
+    # plt.xlabel('Y1-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 4)
+    plt.title("b")
+    plt.plot(x_b, y_b )
+    # plt.plot(173, 1, 'bo')
+    # plt.xlabel('B-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 5)
+    plt.title("r")
+    plt.plot(x_r, y_r)
+    # plt.plot(416.8, 1, 'bo')
+    # plt.xlabel('R-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 6)
+    plt.title("th")
+    plt.plot(x_th , y_th )
+    # plt.plot(338, 1, 'bo')
+    # plt.xlabel('TH-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 7)
+    plt.title("d")
+    plt.plot(x_d, y_d)
+    # plt.plot(416.8, 1, 'bo')
+    # plt.xlabel('D-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 8)
+    plt.title("y2")
+    plt.plot(x_y2 , y_y2 )
+    # plt.plot(338, 1, 'bo')
+    # plt.xlabel('Y2-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 9)
+    plt.title("t")
+    plt.plot(x_t, y_t)
+    # plt.plot(416.8, 1, 'bo')
+    # plt.xlabel('T-Frequency')
+    plt.ylabel('Nmlz Amp')
+
+    plt.subplot(5, 2, 10)
+    plt.title("y3")
+    plt.plot(x_y3 , y_y3 )
+    # plt.plot(338, 1, 'bo')
+    # plt.xlabel('R-Frequency')
+    plt.ylabel('Nmlz Amp')
+    plt.show()
 
     plt.plot(x_all[:1500], y_all[:1500])
     #ORG-- #a1 [96.2,0.243] #a2 [86.2,0.577] #o1 [92.8,] #o2 [173,] #i [416.8,] #u [338,]
